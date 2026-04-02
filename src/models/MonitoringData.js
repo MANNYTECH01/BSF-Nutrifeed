@@ -1,37 +1,37 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db");
 
-const FeedRecord = sequelize.define(
-  "FeedRecord",
+const MonitoringData = sequelize.define(
+  "MonitoringData",
   {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true
     },
-    feedType: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    quantityProduced: {
+    larvaeGrowthRate: {
       type: DataTypes.FLOAT,
       allowNull: false
     },
-    productionDate: {
-      type: DataTypes.DATEONLY,
+    temperature: {
+      type: DataTypes.FLOAT,
       allowNull: false
     },
-    inputMaterial: {
+    humidity: {
+      type: DataTypes.FLOAT,
+      allowNull: false
+    },
+    inputLog: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    outputFeed: {
+    outputLog: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    notes: {
-      type: DataTypes.TEXT,
-      allowNull: true
+    recordedAt: {
+      type: DataTypes.DATE,
+      allowNull: false
     }
   },
   {
@@ -39,4 +39,4 @@ const FeedRecord = sequelize.define(
   }
 );
 
-module.exports = FeedRecord;
+module.exports = MonitoringData;

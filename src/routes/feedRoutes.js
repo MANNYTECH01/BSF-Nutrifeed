@@ -1,10 +1,23 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const feedController = require('../controllers/feedController');
-const { protect } = require('../middleware/auth');
 
-// Only authenticated users can log or view data
-router.post('/log', protect, feedController.createRecord);
-router.get('/all', protect, feedController.getAllRecords);
+const authMiddleware = require("../middleware/authMiddleware");
+const validateMiddleware = require("../middleware/validateMiddleware");
+const { createFeedValidator, feedIdValidator } = require("../validators/feedValidators");
+const {
+  createFeedRecord,
+  getAllFeedRecords,
+  getFeedRecordById,
+  updateFeedRecord,
+  deleteFeedRecord
+} = require("../controllers/feedController");
+
+router.use(authMiddleware);
+
+router.post("/", createFeedValidator, validateMiddleware, createFeedRecord);
+router.get("/", getAllFeedRecords);
+router.get("/:id", feedIdValidator, validateMiddleware, getFeedRecordById);
+router.put("/:id", feedIdValidator, validateMiddleware, updateFeedRecord);
+router.delete("/:id", feedIdValidator, validateMiddleware, deleteFeedRecord);
 
 module.exports = router;
