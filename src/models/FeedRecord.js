@@ -35,7 +35,18 @@ const FeedRecord = sequelize.define(
     }
   },
   {
-    timestamps: true
+    timestamps: true,
+    indexes: [
+      {
+        fields: ["userId"]
+      },
+      {
+        fields: ["productionDate"]
+      },
+      {
+        fields: ["feedType"]
+      }
+    ]
   }
 );
 

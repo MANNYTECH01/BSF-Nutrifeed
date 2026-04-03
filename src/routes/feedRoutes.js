@@ -9,11 +9,13 @@ const {
   getAllFeedRecords,
   getFeedRecordById,
   updateFeedRecord,
-  deleteFeedRecord
+  deleteFeedRecord,
+  getFeedStats
 } = require("../controllers/feedController");
 
 router.use(authMiddleware);
 
+router.get("/stats", getFeedStats);
 router.post("/", createFeedValidator, validateMiddleware, createFeedRecord);
 router.get("/", getAllFeedRecords);
 router.get("/:id", feedIdValidator, validateMiddleware, getFeedRecordById);

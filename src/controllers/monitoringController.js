@@ -1,4 +1,5 @@
 const { MonitoringData, FeedRecord } = require("../models");
+const createAuditLog = require("../middleware/auditMiddleware");
 
 exports.createMonitoringRecord = async (req, res, next) => {
   try {
@@ -36,6 +37,14 @@ exports.createMonitoringRecord = async (req, res, next) => {
       inputLog,
       outputLog,
       recordedAt
+    });
+
+    await createAuditLog({
+      userId: req.user.id,
+      action: "CREATE",
+      entity: "MonitoringData",
+      entityId: monitoring.id,
+      details: { feedRecordId, temperature, humidity }
     });
 
     return res.status(201).json({

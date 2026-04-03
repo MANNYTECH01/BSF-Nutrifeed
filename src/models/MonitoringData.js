@@ -35,7 +35,15 @@ const MonitoringData = sequelize.define(
     }
   },
   {
-    timestamps: true
+    timestamps: true,
+    indexes: [
+      {
+        fields: ["feedRecordId"]
+      },
+      {
+        fields: ["recordedAt"]
+      }
+    ]
   }
 );
 

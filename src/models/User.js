@@ -32,7 +32,16 @@ const User = sequelize.define(
     }
   },
   {
-    timestamps: true
+    timestamps: true,
+    indexes: [
+      {
+        unique: true,
+        fields: ["email"]
+      },
+      {
+        fields: ["role"]
+      }
+    ]
   }
 );
 

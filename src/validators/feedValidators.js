@@ -18,7 +18,11 @@ exports.createFeedValidator = [
   body("outputFeed")
     .trim()
     .notEmpty()
-    .withMessage("Output feed is required")
+    .withMessage("Output feed is required"),
+  body("notes")
+    .optional()
+    .isLength({ max: 500 })
+    .withMessage("Notes must not exceed 500 characters")
 ];
 
 exports.feedIdValidator = [
